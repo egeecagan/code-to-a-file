@@ -1,0 +1,34 @@
+{
+    "name": "open-single-file",
+    "displayName": "Open Single File Button",
+    "description": "Adds an 'Open a Single File' button to the VS Code Welcome screen.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "activationEvents": [
+        "onCommand:extension.openSingleFile"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.openSingleFile",
+                "title": "Open a Single File"
+            }
+        ],
+        "viewsWelcome": [
+            {
+                "view": "explorer",
+                "contents": "[Code to a File](command:extension.openSingleFile)"
+            }
+        ]
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs"
+}
