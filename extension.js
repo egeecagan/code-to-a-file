@@ -1,20 +1,22 @@
 const vscode = require('vscode');
 
 function activate(context) {
-    let disposable = vscode.commands.registerCommand('extension.openSingleFile', async () => {
-        const fileUri = await vscode.window.showOpenDialog({
+    let disposable = vscode.commands.registerCommand('extension.codeToAFile', async () => {
+        const selection = await vscode.window.showOpenDialog({
             canSelectMany: false,
-            openLabel: 'Open',
-            filters: {
-                'All files': ['*']
-            }
+            openLabel: 'Code to a File',
+            filters: { 'All files': ['*'] }
         });
 
-        if (fileUri && fileUri[0]) {
-            vscode.workspace.openTextDocument(fileUri[0]).then(doc => {
-                vscode.window.showTextDocument(doc);
-            });
+        if (!selection || !selection[0]) {
+            return;
         }
+
+        const fileUri = selection[0];
+
+        const doc = await vscode.workspace.openTextDocument(fileUri);
+
+        await vscode.window.showTextDocument(doc, { preview: false });
     });
 
     context.subscriptions.push(disposable);
